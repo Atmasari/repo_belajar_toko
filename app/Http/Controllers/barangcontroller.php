@@ -11,7 +11,7 @@ class barangcontroller extends Controller
   public function store (Request $request){
       $validator=Validator::make($request->all(),
       [
-        'kode_barang' => 'required',
+        // 'kode_barang' => 'required', kalau dia auto increment, ga perlu di required, siapp
         'nama_barang' => 'required',
         'harga' => 'required',
         'id_customer' => 'required'
