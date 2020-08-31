@@ -17,6 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('/barang', 'barangcontroller@store');
-Route::post('/customer', 'customercontroller@store');
-Route::post('/transaksi', 'transaksicontroller@store');
+
+Route::get('/barang','barangcontroller@show');
+Route::post('/barang','barangcontroller@store');
+
+Route::get('/customer','customercontroller@show');
+Route::post('/customer','customercontroller@store');
+
+Route::get('/transaksi','transaksicontroller@show');
+Route::get('/transaksi/{id}','transaksicontroller@detail');
+Route::post('/transaksi','transaksicontroller@store');

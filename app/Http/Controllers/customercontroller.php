@@ -8,6 +8,10 @@ use App\customer;
 
 class customercontroller extends Controller
 {
+  public function show()
+  {
+    return customer::all();
+  }
   // ga rapi script nya, copas yaa? btulll
   public function store (Request $request){ //typomu nak
     $validator=Validator::make($request->all(),
