@@ -27,3 +27,4 @@ Route::post('/customer','customercontroller@store');
 Route::get('/transaksi','transaksicontroller@show');
 Route::get('/transaksi/{id}','transaksicontroller@detail');
 Route::post('/transaksi','transaksicontroller@store');
+Route::put('/customer/{id}','customercontroller@update');

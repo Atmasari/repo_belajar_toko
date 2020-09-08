@@ -33,4 +33,23 @@ class customercontroller extends Controller
 
     }
   }
+  public function update($id, Request $request)
+  {
+    $validator=Validator::make($request->all(),
+    [
+      'nama' => 'required'
+    ]);
+    if ($validator->fails()) {
+      return Response()->json($validator->errors());
+    }
+    $ubah = customer::where('id_customer',$id)->update([
+      'nama'=> $request-> nama
+    ]);
+    if ($ubah) {
+      return Response()->json(['status'=> 1]);
+    }
+    else {
+      return Response()->json(['status'=> 0]);
+    }
+  }
 }
