@@ -1,7 +1,11 @@
 <?php
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+
+Route::post('/register', 'UserController@register');
+Route::post('/login', 'UserController@login');
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,18 +18,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::group(['middleware' => ['jwt.verify']], function()
+{
+  Route::get('/barang','barangcontroller@show');
+  Route::post('/barang','barangcontroller@store');
+
+  Route::get('/customer','customercontroller@show');
+  Route::post('/customer','customercontroller@store');
+
+  Route::get('/transaksi','transaksicontroller@show');
+  Route::get('/transaksi/{id}','transaksicontroller@detail');
+  Route::post('/transaksi','transaksicontroller@store');
+  Route::put('/customer/{id}','customercontroller@update');
+  Route::delete('/customer/{id}','customercontroller@destroy');
+
 });
-
-Route::get('/barang','barangcontroller@show');
-Route::post('/barang','barangcontroller@store');
-
-Route::get('/customer','customercontroller@show');
-Route::post('/customer','customercontroller@store');
-
-Route::get('/transaksi','transaksicontroller@show');
-Route::get('/transaksi/{id}','transaksicontroller@detail');
-Route::post('/transaksi','transaksicontroller@store');
-Route::put('/customer/{id}','customercontroller@update');
-Route::delete('/customer/{id}','customercontroller@destroy');
