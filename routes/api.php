@@ -21,16 +21,24 @@ Route::post('/login', 'UserController@login');
 
 Route::group(['middleware' => ['jwt.verify']], function()
 {
+  Route::group(['middleware'=> ['api.superadmin']], function()
+  {
+    Route::delete('/customer/{id}','customercontroller@destroy');
+  });
+
+  Route::group(['middleware'=> ['api.admin']], function()
+  {
+    Route::post('/barang','barangcontroller@store');
+    Route::post('/customer','customercontroller@store');
+    Route::post('/transaksi','transaksicontroller@store');
+    Route::put('/customer/{id}','customercontroller@update');
+
+  });
+
   Route::get('/barang','barangcontroller@show');
-  Route::post('/barang','barangcontroller@store');
-
   Route::get('/customer','customercontroller@show');
-  Route::post('/customer','customercontroller@store');
-
   Route::get('/transaksi','transaksicontroller@show');
   Route::get('/transaksi/{id}','transaksicontroller@detail');
-  Route::post('/transaksi','transaksicontroller@store');
-  Route::put('/customer/{id}','customercontroller@update');
-  Route::delete('/customer/{id}','customercontroller@destroy');
+
 
 });
